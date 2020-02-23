@@ -11,12 +11,12 @@
     font-weight: 400;
 }
 
-.dispNone {
-    display: none;
-}
-
 .dispBlock {
     display: block;
+}
+
+.dispNone {
+    display: none;
 }
 
 /* Style for field level text validation */
@@ -24,6 +24,7 @@
 .error-color {
     color: red;
 }
+
 
 @media (max-width:1000px) {
     .card-style {

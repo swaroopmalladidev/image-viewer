@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
+import { Redirect, Link } from 'react-router-dom';
 import './Header.css';
 
 class Header extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            isUserLoggedIn: sessionStorage.getItem('access-token') != null
+        }
+    }
+
     render() {
+        const {open} = this.state;
         return (
-            <div>
-                <header className='app-header'>
-                    <span className='app-logo'>Image Viewer</span>
-                </header>
+            <div className='app-header'>
+                {!this.state.isUserLoggedIn && <Redirect to='/' />}
+                <Link to="/home" className="app-logo">Image Viewer</Link>
             </div>
         )
     }

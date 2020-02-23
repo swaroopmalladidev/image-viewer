@@ -17,11 +17,11 @@ class Login extends Component {
         super();
         this.state = {
             username: "",
-            userNameRequired: "dispNone",
             password: "",
+            userNameRequired: "dispNone",
             passwordRequired: "dispNone",
             invalidCredentials: "dispNone",
-            isUserLoggedIn: sessionStorage.getItem('access-token') != null
+            isUserLoggedIn: sessionStorage.getItem('access-token')!= null
         }
     }
 
@@ -33,9 +33,37 @@ class Login extends Component {
         this.setState({password: event.target.value});
     }
 
+    loginClickHandler = () => {
+        let loginUserName = "upgrad";
+        let loginPassword = "upgrad";
+        let accessToken = "8661035776.d0fcd39.39f63ab2f88d4f9c92b0862729ee2784";
+
+        this.state.username === "" ? this.setState(
+            { 
+                userNameRequired: "dispBlock" }) : this.setState({ userNameRequired: "dispNone" 
+            });
+        this.state.password === "" ? this.setState(
+            { 
+                passwordRequired: "dispBlock" }) : this.setState({ passwordRequired: "dispNone" 
+            });
+
+        if (this.state.username === "" || this.state.password === "") {
+            this.setState({ invalidCredentials: "dispNone" });
+        } else if (this.state.username === loginUserName || this.state.password === loginPassword) {
+            sessionStorage.setItem("access-token", accessToken);
+            this.props.history.push("/home");
+        } else {
+            this.setState({ invalidCredentials: "dispBlock" });
+        }
+    }
+
     render() {
         return (
-            <div><Header/>
+            <div>
+                {
+                this.state.isUserLoggedIn && <Redirect to='/home'/>
+                }
+            <Header />
             <br/>
             <br/>
             <Card className="card">
@@ -64,11 +92,13 @@ class Login extends Component {
                     <br/>
                     <br/>
                     <FormHelperText className={this.state.invalidCredentials}>
-                            <span className="error-color">Incorrect username and/or password</span>>
+                            <span className="error-color">Incorrect username and/or password</span>
                     </FormHelperText>
                     <br/>
                     <br/>
-                    <Button variant="contained" color="primary" onClick={this.loginClickHandler}>Login</Button>
+                    <Button variant="contained" color="primary" onClick={this.loginClickHandler}>
+                        LOGIN
+                    </Button>
                 </CardContent>
             </Card>
             </div>
