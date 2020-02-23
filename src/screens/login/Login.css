@@ -1,0 +1,33 @@
+/* Style for the Login Card */
+.card {
+    width: 25%;
+    margin: auto auto auto auto;
+    padding: 5%;
+}
+
+/* Style for Login Label */
+.login-label {
+    font-size: xx-large;
+    font-weight: 400;
+}
+
+.dispBlock {
+    display: block;
+}
+
+.dispNone {
+    display: none;
+}
+
+/* Style for field level text validation */
+
+.error-color {
+    color: red;
+}
+
+
+@media (max-width:1000px) {
+    .card-style {
+        width: 75%;
+    }
+}
