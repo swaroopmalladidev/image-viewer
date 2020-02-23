@@ -4,11 +4,7 @@ import Login from './login/Login';
 import Home from './home/Home';
 import Profile from './profile/Profile';
 
-<<<<<<< HEAD
-/* Controller component for managing Application Navigations (Login, Home and Profile) */
-=======
-/* Controller component for managing Application Navigations */
->>>>>>> 282377cb38770abec5a5ec06c48813c62c52868a
+/* Controller component for managing Application Navigations of Login page, Home Page and Profile Page) */
 class Controller extends Component {
   
   constructor() {
