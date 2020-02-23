@@ -25,14 +25,17 @@ class Login extends Component {
         }
     }
 
+    /* Username change Handler */
     userNameChangeHandler = (event) => {
         this.setState({username: event.target.value});
     }
 
+    /* Password change Handler */
     passwordChangeHandler = (event) => {
         this.setState({password: event.target.value});
     }
 
+    /* Login button click handler */
     loginClickHandler = () => {
         let loginUserName = "upgrad";
         let loginPassword = "upgrad";

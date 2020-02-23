@@ -11,12 +11,14 @@
     font-weight: 400;
 }
 
-.dispBlock {
-    display: block;
-}
-
+/* Hide the element */
 .dispNone {
     display: none;
+}
+
+/* Show the hidden element */
+.dispBlock {
+    display: block;
 }
 
 /* Style for field level text validation */
