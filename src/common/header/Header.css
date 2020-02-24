@@ -57,6 +57,14 @@
     border-radius: 50%;
 }
 
+.profile-options{
+    margin: 50px 0 0 0;
+}
+
+.profileMenu-item{
+    font: bold;
+}
+
 @media(max-width:1000px) {
     .searchBox-headerarea {
         max-width: 310px;
