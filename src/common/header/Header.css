@@ -1,4 +1,5 @@
 /** Application header style*/
+
 .app-header {
     background-color: #263238;
     height: 70px;
@@ -7,7 +8,9 @@
     align-items: center;
     position: relative;
 }
+
 /** Application Logo style*/
+
 .app-logo {
     color: #fff;
     font-size: 18px;
@@ -19,61 +22,58 @@
 }
 
 .header-right-area {
-    display: flex;
-    align-items: center;
     margin-left: auto;
+    align-items: center;
+    display: flex;
 }
 
-
-
+/** Search header area styling*/
 .searchBox-headerarea {
+    display: flex;
     border-radius: 4px;
     width: 300px;
     background-color: #c0c0c0;
     align-items: center;
     height: 35px;
-    display: flex;
     margin-right: 15px;
 }
 
+/** Search box styling*/
 .searchBox {
     margin: 2% 2% 2% 2%;
+    text-decoration: none;
 }
 
-.searchIcon {
-    margin-left: 15px;
+/**Profile Icon Styling*/
+.profileIcon {
+    height: 75px;
+    width: 75px;
+    border: 20px solid white;
 }
 
-.profile-pictureIcon {
-    height: 70px;
-    width: 70px;
-    background-color: white;
-    border: 10px solid red;
-}
-
-.profile-pic {
+/** Porfile Pic Styling*/
+.profilePic {
     height: 100%;
     width: 100%;
     border-radius: 50%;
 }
 
-.profile-options{
+.profile-options {
     margin: 50px 0 0 0;
 }
 
-.profileMenu-item{
+.profileMenu-item {
     font: bold;
 }
 
+/* Responsive style*/
+
 @media(max-width:1000px) {
+    .profileIcon {
+        max-width: 70px;
+    }
     .searchBox-headerarea {
         max-width: 310px;
         width: auto;
     }
-    .profile-pictureIcon {
-        max-width: 70px;
-    }
 }
-
-
-

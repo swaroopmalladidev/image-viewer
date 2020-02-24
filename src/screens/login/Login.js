@@ -11,9 +11,10 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import { Redirect } from 'react-router-dom';
 
+/** Login Component */
 class Login extends Component {
 
-    constructor(){
+    constructor() {
         super();
         this.state = {
             username: "",
@@ -21,38 +22,36 @@ class Login extends Component {
             userNameRequired: "dispNone",
             passwordRequired: "dispNone",
             invalidCredentials: "dispNone",
-            isUserLoggedIn: sessionStorage.getItem('access-token')!= null
+            isLoggedInUser: sessionStorage.getItem('access-token') != null
         }
     }
 
     /* Username change Handler */
-    userNameChangeHandler = (event) => {
-        this.setState({username: event.target.value});
+    userNameHandler = (event) => {
+        this.setState({ username: event.target.value });
     }
 
     /* Password change Handler */
-    passwordChangeHandler = (event) => {
-        this.setState({password: event.target.value});
+    passwordHandler = (event) => {
+        this.setState({ password: event.target.value });
     }
 
-    /* Login button click handler */
-    loginClickHandler = () => {
+    /* Login button handler with validations*/
+    loginButtonHandler = () => {
+        /* Pass username, password and upgrad provided access token as hard coded values for user validation*/
         let loginUserName = "upgrad";
-        let loginPassword = "upgrad";
+        let loginPassword = "upgradpwd";
         let accessToken = "8661035776.d0fcd39.39f63ab2f88d4f9c92b0862729ee2784";
-
+        /* Check for empty fields in username and password */
         this.state.username === "" ? this.setState(
-            { 
-                userNameRequired: "dispBlock" }) : this.setState({ userNameRequired: "dispNone" 
-            });
+            { userNameRequired: "dispBlock" }) : this.setState({ userNameRequired: "dispNone" });
         this.state.password === "" ? this.setState(
-            { 
-                passwordRequired: "dispBlock" }) : this.setState({ passwordRequired: "dispNone" 
-            });
+            { passwordRequired: "dispBlock" }) : this.setState({ passwordRequired: "dispNone" });
 
+        /* Check for validaity of provided username and password as per the defined values here*/
         if (this.state.username === "" || this.state.password === "") {
             this.setState({ invalidCredentials: "dispNone" });
-        } else if (this.state.username === loginUserName || this.state.password === loginPassword) {
+        } else if (this.state.username === loginUserName && this.state.password === loginPassword) {
             sessionStorage.setItem("access-token", accessToken);
             this.props.history.push("/home");
         } else {
@@ -64,46 +63,55 @@ class Login extends Component {
         return (
             <div>
                 {
-                this.state.isUserLoggedIn && <Redirect to='/home'/>
+                    this.state.isLoggedInUser && <Redirect to='/home' />
                 }
-            <Header />
-            <br/>
-            <br/>
-            <Card className="card">
-                <CardContent>
-                    <Typography variant="subtitle1">
-                    <span className="login-label">LOGIN</span>
-                    </Typography>
-                    <br/>
-                    <br/>
-                    <FormControl className="formControl" required fullWidth>
+                <Header />
+                <br />
+                <br />
+                {/* /*LOGIN Card*/}
+                <Card className="card">
+                    <CardContent>
+                        <Typography variant="subtitle1">
+                            <span className="login-label">
+                                LOGIN
+                    </span>
+                        </Typography>
+                        <br />
+                        <br />
+                        <FormControl required fullWidth>
                             <InputLabel htmlFor="username">Username</InputLabel>
-                            <Input id="username" type="text" onChange={this.userNameChangeHandler}/>
+                            <Input id="username" type="text" onChange={this.userNameHandler} />
                             <FormHelperText className={this.state.userNameRequired}>
-                                <span className="error-color">required</span>
+                                <span className="error-color">
+                                    required
+                                </span>
                             </FormHelperText>
-                    </FormControl>
-                    <br/>
-                    <br/>
-                    <FormControl className="formControl" required fullWidth>
-                        <InputLabel htmlFor="password">Password</InputLabel>
-                            <Input id="password" type="password" onChange={this.passwordChangeHandler}/>
+                        </FormControl>
+                        <br />
+                        <br />
+                        <FormControl required fullWidth>
+                            <InputLabel htmlFor="password">Password</InputLabel>
+                            <Input id="password" type="password" onChange={this.passwordHandler} />
                             <FormHelperText className={this.state.passwordRequired}>
-                                <span className="error-color">required</span>
+                                <span className="error-color">
+                                    required
+                                </span>
                             </FormHelperText>
-                    </FormControl>
-                    <br/>
-                    <br/>
-                    <FormHelperText className={this.state.invalidCredentials}>
-                            <span className="error-color">Incorrect username and/or password</span>
-                    </FormHelperText>
-                    <br/>
-                    <br/>
-                    <Button variant="contained" color="primary" onClick={this.loginClickHandler}>
-                        LOGIN
+                        </FormControl>
+                        <br />
+                        <br />
+                        <FormHelperText className={this.state.invalidCredentials}>
+                            <span className="error-color">
+                                Incorrect username and/or password
+                            </span>
+                        </FormHelperText>
+                        <br />
+                        <br />
+                        <Button variant="contained" color="primary" onClick={this.loginButtonHandler}>
+                            LOGIN
                     </Button>
-                </CardContent>
-            </Card>
+                    </CardContent>
+                </Card>
             </div>
         )
     }

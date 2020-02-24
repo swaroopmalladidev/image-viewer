@@ -1,0 +1,23 @@
+/** Styling for hash tags*/
+.hash-tag {
+    margin: 2px 0px 0px 0px;
+    color: rgb(104, 199, 231);
+}
+
+/** Styling for likes count*/
+.likes-count {
+    display: inline;
+    padding-left: 10px;
+}
+
+/**Styling for comments section*/
+.comments-section {
+    width: 100%;
+    margin: 10% 0 0 0;
+}
+
+/** Stying for comments input*/
+.comments-input {
+    width: 100%;
+    margin-right: 10px;
+}

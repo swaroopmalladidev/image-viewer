@@ -7,59 +7,60 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
+/**Header Component */
 class Header extends Component {
 
     constructor() {
         super();
         this.state = {
-            isUserLoggedIn: sessionStorage.getItem('access-token') != null,
+            isLoggedInUser: sessionStorage.getItem('access-token') != null,
             menuList: false
         }
     }
 
-    searchBoxChangeHandler = () => {
-
+    /**Search box handler for images search */
+    searchBoxHandler = (e) => {
+        this.props.searchBoxHandler(e.target.value);
     }
 
-    profilePictureClickHandler = (e) => {
-        this.setState({menuList: !this.state.menuList, anchorEl: this.state.anchorEl != null ? null : e.currentTarget});
+    /**Profile pic handler to display menu */
+    profilePicHandler = (e) => {
+        this.setState({ menuList: !this.state.menuList, anchorEl: this.state.anchorEl != null ? null : e.currentTarget });
     }
 
-    myAccountClickHandler = () => {
+    /**My Account handler to navigate user to the user profile page */
+    myAccountHandler = () => {
         this.props.history.push("/profile");
     }
 
-    logOutClickHandler = () => {
+    /**Logout handler to navigate user to login screen */
+    logOutHandler = () => {
         sessionStorage.removeItem('access-token');
-        this.setState({isUserLoggedIn: false});
+        this.setState({ isLoggedInUser: false });
     }
-    
+
     render() {
-        const {open} = this.state;
+
         return (
             <div className='app-header'>
-                {!this.state.isUserLoggedIn && <Redirect to='/' />}
+                {!this.state.isLoggedInUser && <Redirect to='/' />}
                 <Link to="/home" className="app-logo">Image Viewer</Link>
-                {this.state.isUserLoggedIn &&
+                {this.state.isLoggedInUser &&
                     <div className="header-right-area">
-                        
                         {this.props.pageId === 'home' &&
                             <div className="searchBox-headerarea">
-                                <SearchIcon className="searchIcon" />
-                                <Input placeholder="Search..." disableUnderline={true} className="searchBox" onChange={this.searchBoxChangeHandler} />
+                                <SearchIcon /><Input className="searchBox" placeholder="Search..." disableUnderline={true} onChange={this.searchBoxHandler} />
                             </div>
                         }
-                        
+
                         <div>
-                            <IconButton className="profile-pictureIcon" onClick={this.profilePictureClickHandler}>
-                            <img src={this.props.profilePicture} alt="Profile Pic" className="profile-pic" />
+                            <IconButton className="profileIcon" onClick={this.profilePicHandler}>
+                                <img src={this.props.profilePicture} alt="Profile Pic" className="profilePic" />
                             </IconButton>
-                            <Menu className="profile-options" anchorEl={this.state.anchorEl} keepMounted open={this.state.menuList} onClose={this.profilePictureClickHandler}>
-                                <MenuItem className="profileMenu-item" onClick={this.myAccountClickHandler}><span>My Account</span>
-                                </MenuItem>
-                                <hr style={{width: 80}}/>
-                                <MenuItem className="profileMenu-item" onClick={this.logOutClickHandler}><span>Logout</span>
-                                </MenuItem>
+                            <Menu className="profile-options" anchorEl={this.state.anchorEl} keepMounted open={this.state.menuList} onClose={this.profilePicHandler}>
+                                <MenuItem className="profileMenu-item" onClick={this.myAccountHandler}><span>My Account</span></MenuItem>
+                                <hr style={{ width: 80 }} />
+                                <MenuItem className="profileMenu-item" onClick={this.logOutHandler}><span>Logout</span></MenuItem>
                             </Menu>
                         </div>
                     </div>
